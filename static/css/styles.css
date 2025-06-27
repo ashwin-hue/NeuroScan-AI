@@ -204,7 +204,11 @@ body {
     transform: scale(1.1);
 }
 
-/* Footer */
+.text-muted {
+    --bs-text-opacity: 1;
+    color: rgb(255 255 255) !important;
+}
+
 footer {
     background-color: var(--medical-dark);
     color: white;
