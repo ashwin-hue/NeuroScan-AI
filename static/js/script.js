@@ -96,7 +96,7 @@ analyzeBtn.addEventListener('click', async function() {
         }
 
         // Update UI with real results from Flask
-        resultImage.src = data.image_url;
+        resultImage.src = `data:image/jpeg;base64,${data.image_data}`;
         confidenceBar.style.width = `${data.confidence}%`;
         confidenceText.textContent = `${data.confidence}% confidence`;
         predictedCondition.textContent = data.prediction;
