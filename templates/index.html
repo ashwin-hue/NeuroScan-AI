@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroScan AI | Stroke Detection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="nav-container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-brain me-2"></i>NeuroScan AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Find Your Doctor</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Advanced Stroke Detection AI</h1>
+                    <p class="lead mb-4">Our cutting-edge artificial intelligence analyzes CT scans to detect potential stroke indicators with remarkable accuracy.</p>
+                    <button class="btn btn-light btn-lg px-4 me-2" onclick="scan_me()">
+                        <i class="fas fa-upload me-2"></i>Upload Scan
+                    </button>
+                    <button class="btn btn-outline-light btn-lg px-4" onclick="about()">
+                        <i class="fas fa-info-circle me-2"></i>Learn More
+                    </button>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="https://img.freepik.com/free-vector/doctor-analyzing-brain-scan_23-2148520389.jpg" alt="AI analyzing brain scan" class="img-fluid rounded-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="scan-now" class="py-5 bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center mb-5">
+                    <h2 class="fw-bold mb-3">Upload CT Scan for Analysis</h2>
+                    <p class="text-muted">Our AI will analyze the brain CT scan for signs of stroke or other abnormalities</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4">
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                            <h5>Drag & Drop CT Scan Image</h5>
+                            <p class="text-muted">or click to browse files</p>
+                            <p class="small text-muted">Supported formats: JPG, PNG, DICOM</p>
+                            <input type="file" id="fileInput" accept="image/*" class="d-none">
+                        </div>
+                        <div class="text-center mt-3">
+                            <img id="imagePreview" class="img-fluid">
+                        </div>
+                        <div class="text-center mt-3">
+                            <div class="spinner-border text-primary loading-spinner" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button id="analyzeBtn" class="btn btn-primary btn-lg px-4" disabled>
+                                <i class="fas fa-search me-2"></i>Analyze Scan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section (Initially Hidden) -->
+    <section id="resultsSection" class="py-5 bg-light" style="display: none;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-4 result-card" id="resultCard">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="mb-0">Analysis Results</h3>
+                            <span class="badge bg-primary rounded-pill" id="resultBadge">NEW</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <h5 class="fw-bold">Uploaded Image</h5>
+                                    <img id="resultImage" class="img-fluid rounded" alt="Result">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <h5 class="fw-bold">Diagnosis</h5>
+                                    <div class="alert" id="diagnosisAlert">
+                                        <i class="fas fa-spinner fa-pulse me-2"></i> Analyzing...
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h5 class="fw-bold">Confidence Level</h5>
+                                    <div class="confidence-meter mb-2">
+                                        <div class="confidence-bar" id="confidenceBar"></div>
+                                    </div>
+                                    <p class="text-muted small" id="confidenceText">0% confidence</p>
+                                </div>
+                                <div class="mb-4">
+                                    <h5 class="fw-bold">Predicted Condition</h5>
+                                    <p class="lead" id="predictedCondition">-</p>
+                                </div>
+                                <div class="warning-box">
+                                    <h5><i class="fas fa-exclamation-triangle text-warning me-2"></i>Important Notice</h5>
+                                    <p>This AI analysis is for preliminary assessment only. Please consult a qualified medical professional for definitive diagnosis and treatment.</p>
+                                    <button class="btn btn-sm btn-outline-warning" onclick="specialists_near_me()">
+                                        <i class="fas fa-user-md me-1"></i> Find a Specialist 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="fw-bold mb-3">How NeuroScan AI Works</h2>
+                    <p class="text-muted">Our advanced deep learning model analyzes CT scans with precision</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <h4>Upload Scan</h4>
+                        <p class="text-muted">Simply upload your brain CT scan image in common formats like JPG, PNG, or DICOM.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI Analysis</h4>
+                        <p class="text-muted">Our deep neural network processes the image to detect subtle patterns indicative of stroke.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <h4>Get Results</h4>
+                        <p class="text-muted">Receive immediate analysis with confidence levels and recommended next steps.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-4">About Our Technology</h2>
+                    <p>NeuroScan AI utilizes state-of-the-art deep learning algorithms trained on thousands of verified CT scans to identify potential stroke indicators with high accuracy.</p>
+                    <p>Our model can distinguish between different types of stroke (ischemic and hemorrhagic) as well as normal scans, providing valuable preliminary information to healthcare providers.</p>
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i> This tool is designed to assist medical professionals, not replace them.
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Technical Specifications</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fas fa-project-diagram me-2 text-primary"></i>
+                                    <strong>Model Architecture:</strong> EfficientNet-B0
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-database me-2 text-primary"></i>
+                                    <strong>Training Data:</strong> 6,650 annotated CT scans
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-tachometer-alt me-2 text-primary"></i>
+                                    <strong>Accuracy:</strong> 81.4% on validation set
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-clock me-2 text-primary"></i>
+                                    <strong>Processing Time:</strong> Typically under 10 seconds
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3">
+                    <h2 class="fw-bold">6,650</h2>
+                    <p>CT Scans Analyzed</p>
+                </div>
+                <div class="col-md-3">
+                    <h2 class="fw-bold">81.4%</h2>
+                    <p>Accuracy Rate</p>
+                </div>
+                <div class="col-md-3">
+                    <h2 class="fw-bold">24/7</h2>
+                    <p>Availability</p>
+                </div>
+                <div class="col-md-3">
+                    <h2 class="fw-bold">10s</h2>
+                    <p>Average Analysis Time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+        <!-- Section: Contact -->
+<section id="contact" class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center mb-5">
+        <h2 class="fw-bold mb-3">Find Your Doctor</h2>
+        <p class="text-muted">Have questions about your results or our technology? Reach out to our specialists.</p>
+
+        <!-- 🔽 Dropdown for Chennai Locations -->
+        <select class="form-select mb-3" id="locationSelect" onchange="showDoctors()">
+          <option selected disabled>-- Select Your Location --</option>
+          <option value="anna_nagar">Anna Nagar</option>
+          <option value="t_nagar">T. Nagar</option>
+          <option value="adyar">Adyar</option>
+          <option value="velachery">Velachery</option>
+        </select>
+
+        <!-- 🧾 Display Doctor Info -->
+        <div id="doctorInfo" class="text-start mt-4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4"><i class="fas fa-brain me-2"></i>NeuroScan AI</h5>
+                    <p class="text-muted">Advanced artificial intelligence for medical imaging analysis.</p>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted">Home</a></li>
+                        <li class="mb-2"><a href="#how-it-works" class="text-muted">How It Works</a></li>
+                        <li class="mb-2"><a href="#about" class="text-muted">About</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-muted">Contact</a></li>
+                    </ul>
+                </div>
+                
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-muted mb-0">© 2023 NeuroScan AI. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small text-muted mb-0">
+                        <i class="fas fa-exclamation-circle me-1"></i> For research use only. Not for diagnostic purposes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+         function specialists_near_me() {
+             window.location.href = "https://search.brave.com/search?q=neuro+specialist+near+me&source=desktop";
+        }
+         function scan_me() {
+             window.location.href = "#scan-now";
+        }
+         function about() {
+             window.location.href = "#about";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
