@@ -254,6 +254,26 @@ footer a:hover {
     border-width: 0.25rem;
 }
 
+.upload-title {
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.scan-desc {
+  color: #007bff;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.disclaimer {
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 992px) {
     .hero-section {
@@ -313,3 +333,74 @@ footer a:hover {
     border-left: 5px solid var(--success-color);
     color: var(--success-color);
 }
+
+.custom-dropdown {
+  text-align: left;
+}
+
+.custom-dropdown .form-label {
+  font-weight: 600;
+  color: var(--medical-dark);
+  font-size: 1.1rem;
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: var(--medical-light);
+  border: 2px solid var(--medical-blue);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--medical-dark);
+  width: 100%;
+  transition: all 0.3s ease;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/2985/2985150.png");
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: right 1rem center;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
+}
+
+.custom-select:focus {
+  box-shadow: 0 0 8px rgba(0, 119, 182, 0.3);
+}
+
+
+@media (max-width: 576px) {
+  .hero-section .btn {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    margin: 0 auto 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .hero-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-section .btn i {
+    margin-right: 8px;
+  }
+
+  html, body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
+
