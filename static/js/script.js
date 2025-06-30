@@ -143,18 +143,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   const doctorData = {
     anna_nagar: [
-      { name: "Dr. Ramesh Kumar", specialty: "Neurologist", rating: "4.8", experience: "12 years" },
-      { name: "Dr. Priya Natarajan", specialty: "Cardiologist", rating: "4.6", experience: "10 years" }
+      { name: "Dr. M. Kodeeswaran", specialty: "Neurologist", rating: "5.0", experience: "24 years" },
+      { name: "Dr. N Thamil Pavai", specialty: "General Medicine, Neurology", rating: "4.0", experience: "29 years" },
+      { name: "Dr. Kannan", specialty: "General Physician, Neurology", rating: "4.0", experience: "33 years" },
+      { name: "Dr. M. Abid Saliya", specialty: "General Physician, Neurology", rating: "4.5", experience: "19 years" },
+      { name: "Dr. T.Arul Mozhi", specialty: "v", rating: "4.5", experience: "27 years" }
     ],
     t_nagar: [
-      { name: "Dr. Suresh Babu", specialty: "Orthopedic", rating: "4.5", experience: "8 years" }
+      { name: "Dr. Srikanth Srinivasan", specialty: "Neurology", rating: "4.5", experience: "30 years" }
     ],
     adyar: [
-      { name: "Dr. Meena Iyer", specialty: "Dermatologist", rating: "4.7", experience: "11 years" }
+      { name: "Dr. Nagarajan V", specialty: "General Medicine, Neurology", rating: "4.5", experience: "50 years" },
+      { name: "Dr. Karthikeyan", specialty: "General Medicine, Neurology", rating: "4.5", experience: "17 years" },
+      { name: "Dr. V.Soundappan", specialty: " General Surgery,Neuro Surgery", rating: "5.0", experience: "45 years" }
     ],
     velachery: [
-      { name: "Dr. Arvind Krishna", specialty: "ENT Specialist", rating: "4.4", experience: "9 years" },
-      { name: "Dr. Lakshmi", specialty: "Pediatrician", rating: "4.9", experience: "13 years" }
+      { name: "Dr. Srinivasan Mariappan", specialty: "Neurology,Pediatrics", rating: "4.6", experience: "9 years" },
+      { name: "Dr. Krishna Kumar", specialty: " General Medicine, Neurology", rating: "3.9", experience: "25 years" }
     ]
   };
 
