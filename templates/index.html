@@ -61,9 +61,17 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mb-5">
-                    <h2 class="fw-bold mb-3">Upload CT Scan for Analysis</h2>
-                    <p class="text-muted">Our AI will analyze the brain CT scan for signs of stroke or other abnormalities</p>
-                </div>
+  <h2 class="fw-bold mb-3" style="font-size: 2rem; color: #2c3e50;">Upload CT Scan for Analysis</h2>
+  
+  <p style="color: #007bff; font-size: 1.1rem; margin-bottom: 0.5rem;">
+    Our AI will analyze the brain CT scan for signs of stroke.
+  </p>
+  
+  <p style="color: #6c757d; font-size: 0.95rem; font-style: italic;">
+    For research use only. Not for diagnostic purposes.
+  </p>
+</div>
+
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -71,8 +79,8 @@
                         <div class="upload-area" id="uploadArea">
                             <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
                             <h5>Drag & Drop CT Scan Image</h5>
-                            <p class="text-muted">or click to browse files</p>
-                            <p class="small text-muted">Supported formats: JPG, PNG, DICOM</p>
+                            <p style="color:#023e8a;">or click to browse files</p>
+                            <p style="color:#023e8a;">Supported formats: JPG, PNG, DICOM</p>
                             <input type="file" id="fileInput" accept="image/*" class="d-none">
                         </div>
                         <div class="text-center mt-3">
@@ -150,7 +158,7 @@
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8 text-center">
                     <h2 class="fw-bold mb-3">How NeuroScan AI Works</h2>
-                    <p class="text-muted">Our advanced deep learning model analyzes CT scans with precision</p>
+                     <span style="color:#023e8a";>Our advanced deep learning model analyzes CT scans with precision</span>
                 </div>
             </div>
             <div class="row g-4">
@@ -195,6 +203,9 @@
                     <p>Our model can distinguish between different types of stroke (ischemic and hemorrhagic) as well as normal scans, providing valuable preliminary information to healthcare providers.</p>
                     <div class="alert alert-info mt-4">
                         <i class="fas fa-info-circle me-2"></i> This tool is designed to assist medical professionals, not replace them.
+                    </div>
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i> For research use only. Not for diagnostic purposes.
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -257,16 +268,22 @@
     <div class="row justify-content-center">
       <div class="col-lg-8 text-center mb-5">
         <h2 class="fw-bold mb-3">Find Your Doctor</h2>
-        <p class="text-muted">Have questions about your results or our technology? Reach out to our specialists.</p>
+        <p style="color: #6c757d";>Your health deserves expert attention. Reach out to our experienced doctors for clarity and support.</p>
 
         <!-- 🔽 Dropdown for Chennai Locations -->
-        <select class="form-select mb-3" id="locationSelect" onchange="showDoctors()">
-          <option selected disabled>-- Select Your Location --</option>
-          <option value="anna_nagar">Anna Nagar</option>
-          <option value="t_nagar">T. Nagar</option>
-          <option value="adyar">Adyar</option>
-          <option value="velachery">Velachery</option>
-        </select>
+         <div class="custom-dropdown mb-4">
+  <label for="locationSelect" class="form-label"><i class="fas fa-map-marker-alt me-2"></i>Choose your location</label>
+  <div class="dropdown-wrapper">
+    <select id="locationSelect" class="custom-select" onchange="showDoctors()">
+      <option disabled selected>Select Your Location In Chennai</option>
+      <option value="anna_nagar">Anna Nagar</option>
+      <option value="t_nagar">T. Nagar</option>
+      <option value="adyar">Adyar</option>
+      <option value="velachery">Velachery</option>
+    </select>
+  </div>
+</div>
+
 
         <!-- 🧾 Display Doctor Info -->
         <div id="doctorInfo" class="text-start mt-4"></div>
